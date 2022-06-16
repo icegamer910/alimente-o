@@ -21,6 +21,12 @@ var desaparecedor;
 var alimentado;
 var piscandodementira;
 var fome
+var sala
+var tesoura
+var barrigaroncando
+var barriguinhacheia
+var pum
+var balaotroll
 
 function preload(){
   salinhadajanta = loadImage("./imagem falando/background.png");
@@ -29,6 +35,11 @@ function preload(){
   piscandodementira = loadAnimation("./imagem falando/blink_1.png","./imagem falando/blink_2.png","./imagem falando/blink_3.png");
   alimentado = loadAnimation("./imagem falando/eat_0.png","./imagem falando/eat_1.png","./imagem falando/eat_2.png","./imagem falando/eat_3.png","./imagem falando/eat_4.png");
   fome = loadAnimation("./imagem falando/sad_1.png","./imagem falando/sad_2.png","./imagem falando/sad_3.png")
+  sala = loadSound("./imagem falando/sound1.mp3");
+  tesoura = loadSound("./imagem falando/rope_cut.mp3");
+  barrigaroncando = loadSound("./imagem falando/sad.wav");
+  barrigunhacheia = loadSound("./imagem falando/eating_sound.mp3");
+  pum = loadSound("./imagem falando/air.wav");
 
   piscandodementira.playing = true;
   alimentado.playing = true;
@@ -58,7 +69,7 @@ function setup()
   papinha = Bodies.rectangle(300,300,15,50);
   World.add(world,papinha);
   cartilagem = new Cartilagem(acorda, papinha);
-  alfredo = createSprite(250,630,100,100);
+  alfredo = createSprite(420,630,100,100);
   alfredo.scale = 0.2;
   alfredo.addAnimation("piscando", piscandodementira);
   alfredo.addAnimation("comendo", alimentado);
@@ -70,6 +81,10 @@ desaparecedor.position(220,30);
 desaparecedor.size(75,75);
 desaparecedor.mouseClicked(barrigacheia);
 
+balaotroll = createImg("./imagem falando/balloon.png");
+balaotroll.position(10,250);
+balaotroll.size(150,100);
+balaotroll.mouseClicked(balaodepum);
 }
 
 function draw() 
@@ -111,4 +126,8 @@ if(corpo!== null){
     return false
   }
 }
+}
+function balaodepum(){
+  Matter.Body.applyForce(papinha,{x:0,y:0},{x:0.01,y:0});
+  pum.play()
 }
